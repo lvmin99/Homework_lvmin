@@ -29,10 +29,11 @@ void loop() {
   lcd.print((float)DHT11.humidity, 2);
   lcd.print("%");
   delay(200);
-  if ((float)DHT11.temperature < 10) {
+   if ((float)DHT11.temperature <= 25) {
     digitalWrite(9, HIGH);//过冷时
+    digitalWrite(13,LOW);
   }
-  if ((float)DHT11.temperature > 15) {
+  if ((float)DHT11.temperature >25) {
     digitalWrite(13,HIGH);//过热时
     digitalWrite(9,LOW);//过热时
   } 

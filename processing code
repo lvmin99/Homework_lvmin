@@ -1,0 +1,50 @@
+import controlP5.*;
+ControlP5 cp5;
+PImage img;
+int rectNum = 200;
+float x = 400;
+float y = 400;
+int xDiv = 200;
+int yDiv = 200;
+import processing.serial.*;
+Serial serial;
+int sensorValue;
+
+void setup() {
+  serial = new Serial(this, "COM3", 9600);
+  img = loadImage("3.jpg");
+  size(453,300);
+}
+
+void draw() {
+  cp5 = new ControlP5(this);
+  cp5.addSlider("x", 0, 500, 20, 40, 100, 20);
+  cp5.addSlider("y", 0, 500, 20, 40, 100, 20);
+  image(img, 0, 0);
+  drawRect();
+}
+
+void drawRect() {
+  for (int i = 0; i < rectNum; i ++) {
+    int x = int(random(width));
+    int y = int(random(height));
+    color c = img.get(x,y);
+    rectMode(CENTER);
+    if(sensorValue<=30){
+    rect(random(120,260), random(40,180), 50,50);
+   fill(0);
+   }
+  if(sensorValue>30&sensorValue<=50){
+    rect(random(120,260), random(40,180), 50,50);
+   fill(0,random(200,255),0);
+   }
+  if(sensorValue>50&sensorValue<=75){
+    rect(random(120,260), random(40,180), 50,50);
+   fill(c);
+   }
+  if(sensorValue>75&sensorValue<=100){
+     rect(random(120,260), random(40,180), 50,50);
+  fill(255,random(180,220),random(180,220));
+   }
+  }
+}
